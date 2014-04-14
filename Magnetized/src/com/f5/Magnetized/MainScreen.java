@@ -1,32 +1,39 @@
 package com.f5.Magnetized;
 
 import com.atom.lib.AbstractScreen;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class MainScreen extends AbstractScreen {
 
-	MagnetizedGame game;
-	ShapeRenderer shapeRenderer;
+	public MagnetizedGame game;
+	public MapWall mapWall;
+	public MagnetBall magnetBall;
+	public MagneticPoints magneticPoints;
+	public Line line;
 
 	public MainScreen(MagnetizedGame game) {
 		this.game = game;
-		this.shapeRenderer = new ShapeRenderer();
+		this.mapWall = new MapWall(game);
+		this.magnetBall = new MagnetBall(game);
+		this.magneticPoints = new MagneticPoints(game);
+		this.line = new Line(game,this);
 	}
 
 	@Override
 	public void render(float delta) {
 		super.render(delta);
-		game.batch.setProjectionMatrix(game.camera.combined);
-		game.batch.begin();
-		game.batch.end();
-
+		mapWall.draw();
+		magnetBall.draw();
+		magneticPoints.draw();
+		line.draw();
 	}
 
 	@Override
 	public void resize(int width, int height) {
 	}
-
 	@Override
 	public void show() {
 	}
